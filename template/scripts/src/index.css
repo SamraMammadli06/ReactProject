@@ -43,7 +43,6 @@ button {
 button {
   color: #3992ff;
   font-weight: 500;
-  font-size: 15px;
 }
 
 button:hover {
@@ -54,10 +53,6 @@ span,
 input
 {
   margin: 0.3rem;
-}
-
-p {
-  word-break: break-all;
 }
 
 textarea:hover,
@@ -233,7 +228,7 @@ i {
   align-items: center;
   justify-content: space-between;
   overflow: hidden;
-  width: 130px;
+
   white-space: pre;
   padding: 0.5rem;
   border-radius: 8px;

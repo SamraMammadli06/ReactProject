@@ -9,8 +9,7 @@ import {
 } from "react-router-dom";
 import NewTaskForm from "../components/Forms/NewTaskForm";
 import { matchSorter } from "match-sorter";
-import TaskCom from "../components/TaskCom";
-import { useRef, useState } from "react";
+import TaskComponent from "../components/TaskComponent";
 
 export async function action() {
     return redirect(`/`);
@@ -29,8 +28,7 @@ function Root() {
     const { tasks, q } = useLoaderData();    
     const submit = useSubmit();
     const navigation = useNavigation();
-    const [tasksList, setTasksList] = useState(tasks);
-    
+
     return (
         <>
             <div id="sidebar">
@@ -52,23 +50,12 @@ function Root() {
                     </Form>
                     <NewTaskForm />
                 </div>
-                <div>
-                    <button onClick={() => {
-                        setTasksList([...tasks]);
-                    }}>All</button>
-                    <button onClick={() => {
-                        setTasksList([...tasks].filter(task => task.completed));
-                    }}>Completed</button>
-                    <button onClick={() => {
-                        setTasksList([...tasks].filter(task => !task.completed));
-                    }}>Not Completed</button>
-                </div>
                 <nav>
                     {tasks.length ? (
                         <ul>
                             {tasks.map((task) => (
                                 <li key={task.id}>
-                                    <TaskCom task={task} />
+                                    <TaskComponent task={task} />
                                 </li>
                             ))}
                         </ul>
