@@ -1,6 +1,5 @@
 import {
     Outlet,
-    Link,
     useLoaderData,
     Form,
     redirect,
@@ -55,13 +54,13 @@ function Root() {
                 <div>
                     <button onClick={() => {
                         setTasksList([...tasks]);
-                    }}>All</button>
+                    }}>Without filter</button>
                     <button onClick={() => {
                         setTasksList([...tasks].filter(task => task.completed));
-                    }}>Completed</button>
+                    }}>Checked</button>
                     <button onClick={() => {
                         setTasksList([...tasks].filter(task => !task.completed));
-                    }}>Not Completed</button>
+                    }}>Not Checked</button>
                 </div>
                 <nav>
                     {tasks.length ? (
