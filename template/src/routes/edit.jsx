@@ -1,13 +1,12 @@
 import { Form, useLoaderData, redirect, useNavigate } from "react-router-dom";
-import { editTask } from "../redux/slices/tasksSlice";
-import EditTaskForm from "../components/Forms/EditTaskForm";
+import EditTaskForm from "../components/Forms/Edit";
+import { updateTask } from "../tasks";
 
 export async function action({ request, params }) {
     const formData = await request.formData();
     const updated = Object.fromEntries(formData);
 
-    editTask({id: params.taskId, title: updated.title, description: updated.description});
-
+    updateTask(params.taskId, updated)
     return redirect(`/tasks/${params.taskId}`);
 }
 

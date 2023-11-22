@@ -1,15 +1,10 @@
 import { Form, NavLink, redirect, useFetcher } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { deleteTask, completeTask } from "../redux/slices/tasksSlice";
-import DeleteTaskForm from "./Forms/DeleteTaskForm";
+import DeleteTaskForm from "./Forms/Delete";
 
 function TaskCom({ task }) {
-    const dispatch = useDispatch();
-
-    const handleDeleteClick = async (e) => {
-        dispatch(deleteTask({ id: task.id }));
-    };
-
+ 
     return (
         <>
             <CheckBox task={task} />
@@ -41,7 +36,7 @@ function CheckBox({ task }) {
                 value={isCompleted ? "true" : "false"}
                 onClick={handleClick}
             >
-                {isCompleted ? "▣" : "▢"}
+                {isCompleted ? "☑" : "☐"}
             </button>
         </fetcher.Form>
     );

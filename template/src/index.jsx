@@ -18,8 +18,8 @@ import Task, {
 import EditTask, {
 	action as editTaskAction
 } from './routes/edit';
-import { action as destroyTaskAction } from './routes/destroy';
 import Index from './routes';
+import { action as completeTaskAction } from "./routes/complete";
 
 const container = document.getElementById('root');
 
@@ -53,8 +53,11 @@ const router = createBrowserRouter([
 					},
 					{
 						path: "tasks/:taskId/destroy",
-						action: destroyTaskAction,
-					}
+					},
+                    {
+                        path: "tasks/:taskId/complete",
+                        action: completeTaskAction,
+                    },
 				],
 			}
 		]

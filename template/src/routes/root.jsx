@@ -7,7 +7,7 @@ import {
     useNavigation,
     useSubmit,
 } from "react-router-dom";
-import NewTaskForm from "../components/Forms/NewTaskForm";
+import NewTaskForm from "../components/Forms/NewTask";
 import { matchSorter } from "match-sorter";
 import TaskCom from "../components/TaskCom";
 import { useRef, useState } from "react";

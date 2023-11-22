@@ -1,8 +1,7 @@
 import { Form, redirect, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteTask } from "../../redux/slices/tasksSlice";
-import { destroyTask } from "../../tasks";
-import { useEffect } from "react";
+import { Delete } from "../../tasks";
 
 function DeleteTaskForm({ task }) {
     const dispatch = useDispatch();
@@ -10,7 +9,7 @@ function DeleteTaskForm({ task }) {
 
     const handleDeleteClick = async (e) => {
         dispatch(deleteTask({ id: task.id }));
-        await destroyTask(task.id);
+        await Delete(task.id);
         navigate('/');
     };
 
