@@ -63,19 +63,11 @@ function setTasks(tasks) {
     return localStorage.setItem("tasks", JSON.stringify(tasks))
 }
 
-let fakeCache = {};
-
-async function fakeNetwork(key) {
-    if (!key) {
-        fakeCache = {};
-    }
-
-    if (fakeCache[key]) {
-        return;
-    }
-
-    fakeCache[key] = true;
-    return new Promise((res) => {
-        setTimeout(res, Math.random() * 1000);
-    });
+export async function CheckTask(id) {
+    let tasks = await getTasks();
+    let task = tasks.find((task) => task.id === id);
+    if (!task) throw new Error("No task found for", id);
+    task.completed = !task.completed;
+    await setTasks(tasks);
+    return task;
 }
