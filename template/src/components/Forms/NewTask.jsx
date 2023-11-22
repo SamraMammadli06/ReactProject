@@ -4,7 +4,7 @@ import {
 import { useDispatch } from "react-redux";
 import { addTask } from "../../redux/slices/tasksSlice";
 
-function NewTaskForm() {
+function NewTask() {
     const dispatch = useDispatch();
 
     const handleClick = (e) => { dispatch(addTask()); };
@@ -18,4 +18,4 @@ function NewTaskForm() {
     );
 }
 
-export default NewTaskForm;
+export default NewTask;

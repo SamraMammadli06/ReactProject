@@ -1,53 +1,49 @@
-import {    
-    Form,
-    NavLink,
-} from "react-router-dom";
+import { Form, NavLink, redirect, useFetcher } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { deleteTask, completeTask } from "../redux/slices/tasksSlice";
-import { useState } from "react";
+import DeleteTaskForm from "./Forms/DeleteTaskForm";
 
-function TaskCom({task}) {
+function TaskCom({ task }) {
     const dispatch = useDispatch();
-    const [isCompleted, setIsCompleted] = useState(task.completed);
 
-    const handleDeleteClick = (e) => { dispatch(deleteTask({id: task.id})); };
-    const handleCompletedChange = (e) => { 
-        setIsCompleted(!isCompleted);
-        dispatch(completeTask({id: task.id})); 
+    const handleDeleteClick = async (e) => {
+        dispatch(deleteTask({ id: task.id }));
     };
 
     return (
         <>
-            <input checked={isCompleted} onChange={handleCompletedChange} type="checkbox"/>
-            <NavLink
-                to={`tasks/${task.id}`}>
-                {task.title ? (
-                    <>
-                        {task.title}
-                    </>
-                ) : (
-                    <i>No Title</i>
-                )}
+            <CheckBox task={task} />
+            <NavLink to={`tasks/${task.id}`}>
+                {task.title ? <>{task.title}</> : <i>No Title</i>}
+                {""}
             </NavLink>
             <Form action={`tasks/${task.id}/edit`}>
-                    <button type="submit">Edit</button>
+                <button type="submit">Edit</button>
             </Form>
-            <Form
-                method="post"
-                action={`tasks/${task.id}/destroy`}
-                onSubmit={(event) => {
-                    if (
-                        !window.confirm(
-                            "Please confirm you want to delete this task."
-                            )
-                            ) {
-                                event.preventDefault();
-                            }
-                        }}
-            >
-                <button onClick={handleDeleteClick} type="submit">Delete</button>
-            </Form>
+            <DeleteTaskForm task={task} />
         </>
+    );
+}
+
+function CheckBox({ task }) {
+    const fetcher = useFetcher();
+    const dispatch = useDispatch();
+    let isCompleted = task.completed;
+
+    const handleClick = (e) => {
+        dispatch(completeTask({ id: task.id }));
+    };
+
+    return (
+        <fetcher.Form method="post" action={`tasks/${task.id}/complete`}>
+            <button
+                name="isCompleted"
+                value={isCompleted ? "true" : "false"}
+                onClick={handleClick}
+            >
+                {isCompleted ? "▣" : "▢"}
+            </button>
+        </fetcher.Form>
     );
 }
 

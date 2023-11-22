@@ -8,7 +8,7 @@ import {
 import { useDispatch } from "react-redux";
 import { editTask } from "../../redux/slices/tasksSlice";
 
-function EditTaskForm() {
+function Edit() {
     const dispatch = useDispatch();
     const { task } = useLoaderData();
     const navigate = useNavigate(); 
@@ -57,4 +57,4 @@ function EditTaskForm() {
     );
 }
 
-export default EditTaskForm;
+export default Edit;
